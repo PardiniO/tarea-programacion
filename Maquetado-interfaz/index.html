@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nueva pestaña</title>
+    <style>
+        body{
+            margin: 0;
+            background-color: rgb(255, 255, 255);
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            font-size: 81.25%;
+        }
+        .contenido{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+        .encabezado{
+            display: flex;
+            flex-direction: row;
+            justify-content: end;
+            align-items: end;
+            gap: 5px;
+            padding: 10px 20px;
+        }
+        .encabezado img{
+            width: 20px;
+            height: 20px;
+            margin-left: 10px;
+        }
+        .encabezado a{
+            text-decoration: none;
+            color: #333;
+            font-size: 14px;
+            margin-left: 10px;
+        }
+
+        .web-logo img{
+            margin-bottom: 38px;
+            margin-top: 115px;
+            width: 272px;
+            height: 92px;
+        }
+
+        .barra-busqueda{
+            display: flex;
+            align-items: center;
+            height: 40px;
+            width: 600px;
+            border: none;
+            border-radius: 25px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+            background-color: #fff;
+            margin-bottom: 36px;
+        }
+        .barra-busqueda img{
+            width: 15px;
+            height: 15px;
+            margin-left: 10px;
+        }
+        .barra-busqueda input{
+            width: 100%;
+            height: 40px;
+            border: none;
+            border-radius: 25px;
+            padding-left: 10px;
+            font-family: inherit;
+            font-size: inherit;
+        }
+        .agregar-contenido button{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 110px;
+            height: 110px;
+            border: none;
+            background-color: transparent;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .agregar-contenido:hover{
+            background-color: #919191;
+        }
+        .agregar-contenido img{
+            width: 50px;
+            height: 50px;
+            margin-bottom: 8px;
+        }
+        .agregar-contenido p{
+            font-size: 14px;
+            color: #333;
+            margin: 0;
+        }
+        .personalizar{
+            display: flex;
+            flex-direction: row;
+            align-items: flex-end;
+            justify-content: flex-end;
+            margin-top: 150px;
+            margin-right: 30px;
+        }
+        .personalizar button{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            width: 180px;
+            height: 30px;
+            cursor: pointer;
+            border: none;
+            background-color: #bcd9f1;
+            border-radius: 20px;
+        }
+        .personalizar button:hover{
+            background-color: #99b5d4;
+        }
+        .personalizar img{
+            width: 15px;
+            height: 15px;
+            margin-right: 10px;
+        }
+        .personalizar p{
+            font-size: 14px;
+            color: #333;
+            margin: 0;
+        }
+
+    </style>
+</head>
+<body>
+    <section class="encabezado">
+            <a href="https://mail.google.com/mail/?tab=rm&ogbl">Gmail</a>
+            <a href="https://www.google.com/imghp?hl=es&tab=ri&ogbl">Imágenes</a>
+            <a href="https://labs.google.com/search?source=ntp" role="button">
+                <img src="C:\Users\Usuario\OneDrive\Escritorio\HTML-universid\imagenes\search-lab-icon.png" title="Search Labs">
+            </a>
+            <a href="https://www.google.com.ar/intl/es/about/products?tab=rh" role="button">
+                <img src="C:\Users\Usuario\OneDrive\Escritorio\HTML-universid\imagenes\apps-icon.png" title="Aplicaciones de Google">
+        </a>
+    </section>
+    
+    <section class="contenido">
+        <div class="web-logo">
+            <img src="C:\Users\Usuario\OneDrive\Escritorio\HTML-universid\imagenes\Google_2015_logo.png">
+        </div>
+    </section>
+    
+    <section class="contenido">
+        <div class="barra-busqueda">
+            <img src="C:\Users\Usuario\OneDrive\Escritorio\HTML-universid\imagenes\buscar.png">
+            <input type="text" placeholder="Buscar en Google">
+        </div>
+    </section>
+    
+    <section class="contenido">
+        <button class="agregar-contenido">
+            <img src="C:\Users\Usuario\OneDrive\Escritorio\HTML-universid\imagenes\agregar.png">
+            <p>Acceso directo</p>
+        </button>
+    </section>
+
+    <section class="personalizar">
+        <button>
+            <img src="C:\Users\Usuario\OneDrive\Escritorio\HTML-universid\imagenes\lapiz-de-color.png" alt="">
+            <p>Personalizar Chrome</p>
+        </button>
+    </section>
+</body>
+</html>
