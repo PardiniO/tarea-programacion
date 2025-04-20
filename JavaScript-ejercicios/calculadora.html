@@ -3,86 +3,238 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="C:\Users\Usuario\OneDrive\Escritorio\HTML-universid\JavaScript-ejercicios\img\calculadora.png" type="image/png">
     <title>Calculadora</title>
     <script>
+        let pantalla;
+        let botones;
+        let operacionPantalla;
+        let operacion = '';
+        let resultado = 0;
 
+        document.addEventListener('DOMContentLoaded', () => {
+            pantalla = document.querySelector('.pantalla h1');
+            operacionPantalla = document.querySelector('.pantalla h2');
+            botones = document.querySelectorAll('button');
+
+            botones.forEach(boton => {
+                boton.addEventListener('click', () => {
+                    const textoBoton = boton.innerText;
+
+                    if (textoBoton === 'C') {
+                        limpiar();
+                    } else if (textoBoton === 'CE') {
+                        borrarUltimo();
+                    } else if (textoBoton === '=') {
+                        calcularResultado();
+                    } else {
+                        agregarCaracter(textoBoton);
+                    }
+                });
+            });
+        });
+
+        function agregarCaracter(caracter) {
+            const maxLength = 15;
+            if (pantalla.innerText.length >= maxLength) return;
+
+            if (pantalla.innerText === '0') {
+                pantalla.innerText = caracter;
+            } else {
+                pantalla.innerText += caracter;
+            }
+            operacionPantalla.innerText += caracter;
+        }
+
+        function limpiar() {
+            pantalla.innerText = '0';
+            operacionPantalla.innerText = '';
+        }
+
+        function borrarUltimo() {
+            pantalla.innerText = pantalla.innerText.slice(0, -1) || '0';
+            operacionPantalla.innerText = operacionPantalla.innerText.slice(0, -1);
+        }
+
+        function calcularResultado() {
+            try {
+                const expresion = pantalla.innerText;
+                const resultado = evaluarExpresion(expresion);
+                pantalla.innerText = resultado.toString().slice(0, 10);
+                operacionPantalla.innerText = expresion + '=';
+            } catch (error) {
+                    pantalla.innerText = 'Error';
+                    operacionPantalla.innerText = '';
+                }
+        }
+
+        function evaluarExpresion(expresion) {
+            return Function(`'use strict'; return (${expresion})`)();
+            
+        }
     </script>
     <style>
-        *{
+        * {
             box-sizing: border-box;
         }
-        body{
+        body {
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
+            min-width: 400px;
             margin: 0;
             background-color: #727272;
-            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-family: monospace, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue';
+            color: #ebfaec;
+            font-size: 1rem;
         }
-        .calculadora{
-            width: 300px;
-            height: 400px;
-            min-width: 250px;
-            min-height: 350px;
+        .calculadora {
+            width: 90%;
+            height: auto;
+            max-width: 400px;
+            min-height: 450px;
             display: flex;
             flex-direction: column;
             border-radius: 10px;
             padding: 10px;
-            background-color: #5b6e62;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            font-family: inherit;
+            background-color: #66A293;
+            border-bottom: #538C80 solid 10px;
+            border-right: #7BAEA7 solid 7px;
+            box-shadow: 0px 0px 20px rgb(0, 0, 0);
         }
-        .pantalla{
+        .pantalla {
             width: 100%;
-            height: 20%;
-            background-color: #3b3d3c;
-            color: #ebfaec;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: end;
+            padding: 10px;
+            margin-bottom: 20px;
+            color: #222F31;
+            background-color: #B1B18F;
             border-radius: 10px;
-            display: flex;
-            text-align: right;
+            font-family: inherit;
         }
-        .botones{
+        .pantalla h2 {
+            width: 100%;
+            height: 15%;
             display: flex;
-            flex-wrap: wrap;
+            justify-content: end;
+            align-items: flex-end;
+            margin: 0;
+            font-size: 0.8rem;
+            color: #283234be;
+        }
+        .pantalla h1 {
+            width: 100%;
+            height: 85%;
+            font-size: 1.5rem;
+            display: flex;
+            justify-content: end;
+            align-items: flex-end;
+            margin: 0;
+        }
+        .botones {
+            width: 100%;
+            height: 80%;
+            display: flex;
+            flex: 1;
+            flex-direction: column;
             gap: 10px;
         }
-        button{
-            height: 20%;
+        .btns-borrar, .btns-mult-div, .btns-suma-resta, .btns-abajo {
+            display: flex;
+            flex: 1;
+            flex-direction: row;
+            justify-content: space-between;
+            gap: 10px;
+        }
+        .btns-0-pto {
+            display: flex;
+            flex: 3;
+            gap: 10px;
+        }
+        .btn-igual {
+            flex: 2;
+        }
+        button {
+            width: 100%;
+            height: 60px;
             border-radius: 10px;
-            background-color: #3b3d3c;
-            color: #1c7930;
+            color: #181417;
             border: none;
+            background-color: #DDDDDD;
+            border-bottom: #BBBDBD solid 8px;
+            border-right: #EDEDEC solid 5px;
             font-size: 20px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.2s, transform 0.2s;
         }
-        button:hover{
-            background-color: #175023;
+        button:active {
+            background-color: #BBBDBD;
+            border: none;
+            color: #94a798;
+            transform: scale(0.90);
+        }
+        .btns-borrar button:nth-child(4), .btns-borrar button:nth-child(5) {
+            background-color: #D77A4C;
+            border-bottom: #9E472B solid 8px;
+            border-right: #AA5431 solid 5px;
+            color: white;
+        }
+        .btns-borrar button:nth-child(4):active, .btns-borrar button:nth-child(5):active {
+            background-color: #AA5431;
+            border: none;
+            color: #94a798;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                font-size: 0.8rem;
+            }
+            .pantalla h1 {
+                font-size: 1.6rem;
+            }
         }
     </style>
 </head>
 <body>
     <div class="calculadora">
-        <div class="pantalla"> <h1>0</h1> </div>
+        <div class="pantalla"> 
+            <h2 class="operacion"></h2>
+            <h1>0</h1> 
+        </div>
 
         <div class="botones">
-            <button>0</button>
-            <button>1</button>
-            <button>2</button>
-            <button>3</button>
-            <button>4</button>
-            <button>5</button>
-            <button>6</button>
-            <button>7</button>
-            <button>8</button>
-            <button>9</button>
-            <button>+</button>
-            <button>-</button>
-            <button>*</button>
-            <button>/</button>
-            <button>=</button>
-            <button>C</button>
-        </div>
+            <div class="btns-borrar">
+                <button>7</button>
+                <button>8</button>
+                <button>9</button>
+                <button>C</button>
+                <button>CE</button>
+            </div>
+            <div class="btns-mult-div">
+                <button>4</button>
+                <button>5</button>
+                <button>6</button>
+                <button>/</button>
+                <button>*</button>
+            </div>
+            <div class="btns-suma-resta">
+                <button>1</button>
+                <button>2</button>
+                <button>3</button>
+                <button>-</button>
+                <button>+</button>
+            </div>
+            <div class="btns-abajo">
+                <div class="btns-0-pto">
+                <button>0</button>
+                <button>.</button>
+            </div>
+            <button class="btn-igual">=</button>
     </div>
 </body>
 </html>
