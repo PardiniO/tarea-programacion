@@ -91,7 +91,7 @@
         }
         .calculadora {
             width: 90%;
-            height: auto;
+            height: 500px;
             max-width: 400px;
             min-height: 450px;
             display: flex;
@@ -106,6 +106,7 @@
         }
         .pantalla {
             width: 100%;
+            height: 20%;
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
@@ -139,22 +140,38 @@
         .botones {
             width: 100%;
             height: 80%;
+            flex: 1;
             display: flex;
             flex-direction: column;
-            flex: 1;
+            flex-wrap: wrap;
             gap: 10px;
         }
-        .fila-borrar, .fila-mult-div, .fila-abajo, .uno-al-tres, .fila-cero-pto, .fila-abajo-der, {
+        .fila-borrar.fila-mult-div, .fila-abajo-izq, .fila-mas-menos {
             display: flex;
-            flex: 1;
+            flex-direction: column;
+            gap: 10px;
+            width: 100%;
+            height: auto;
+        }
+        .fila-borrar, .numeros, .limpiar, .fila-mult-div, .div-mult, .fila-abajo, .fila-abajo-der, .fila-cero-pto {
+            display: flex;
             flex-direction: row;
-            justify-content: space-between;
             gap: 10px;
+            width: 100%;
+            height: auto;
         }
-        .fila-abajo-izq, .fila-mas-menos {
+        .fila-abajo-der > div {
+            flex: 1;
+            MAX-width: 50%;
+        }
+        #igual {
             display: flex;
-            flex-direction: column;
-            gap: 10px;
+            flex-grow: 2;
+            height: auto;
+        }
+        #igual button {
+            width: 100%;
+            height: 100%;
         }
         button {
             width: 100%;
@@ -175,13 +192,13 @@
             color: #94a798;
             transform: scale(0.90);
         }
-        .fila-borrar button:nth-child(4), .btns-borrar button:nth-child(5) {
+        .limpiar button{
             background-color: #D77A4C;
             border-bottom: #9E472B solid 8px;
             border-right: #AA5431 solid 5px;
             color: white;
         }
-        .fila-borrar button:nth-child(4):active, .btns-borrar button:nth-child(5):active {
+        .limpiar button:active {
             background-color: #AA5431;
             border: none;
             color: #94a798;
@@ -206,60 +223,37 @@
 
         <div class="botones">
             <div class="fila-borrar">
-                <div>
+                <div class="numeros">
                     <button>7</button>
-                </div>
-                <div>
                     <button>8</button>
-                </div>
-                <div>
                     <button>9</button>
                 </div>
-                <div id="limpiar">
+                <div class="limpiar">
                     <button>C</button>
-                </div>
-                <div id="borrarUltimo">
                     <button>CE</button>
                 </div>
             </div>
             <div class="fila-mult-div">
-                <div>
+                <div class="numeros">
                     <button>4</button>
-                </div>
-                <div>
                     <button>5</button>
-                </div>
-                <div>
                     <button>6</button>
                 </div>
-                <div>
+                <div class="div-mult">
                     <button>/</button>
-                </div>
-                <div>
                     <button>*</button>
                 </div>
             </div>
-            <div class="abajo">
-
+            <div class="fila-abajo">
                 <div class="fila-abajo-izq">
-                    <div class="uno-al-tres">
-                        <div>
-                            <button>1</button>
-                        </div>
-                        <div>
-                            <button>2</button>
-                        </div>
-                        <div>
-                            <button>3</button>
-                        </div>
+                    <div class="numeros">
+                        <button>1</button>
+                        <button>2</button>
+                        <button>3</button>
                     </div>
                     <div class="fila-cero-pto">
-                        <div>
-                            <button>0</button>
-                        </div>
-                        <div>
-                            <button>.</button>
-                        </div>
+                        <button>0</button>
+                        <button>.</button>
                     </div>
                 </div>
                 <div class="fila-abajo-der">
@@ -267,12 +261,8 @@
                         <button>=</button>
                     </div>
                     <div class="fila-mas-menos">
-                        <div>
-                            <button>-</button>
-                        </div>
-                        <div>
-                            <button>+</button>
-                        </div>
+                        <button>-</button>
+                        <button>+</button>
                     </div>
                 </div>
             </div>
