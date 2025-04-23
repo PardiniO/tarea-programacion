@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TaTeTi</title>
+        <script>
+            document 
+        </script>
+
+        <style>
+            body {
+                height 
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="top">
+            <button id="left"></button>
+            <button id="center"></button>
+            <button id="right"></button>
+        </div>
+
+        <div class="center">
+            <button id="left"></button>
+            <button id="center"></button>
+            <button id="right"></button>
+        </div>
+
+        <div class="bottom">
+            <button id="left"></button>
+            <button id="center"></button>
+            <button id="right"></button>
+        </div>
+
+        
+    </body>
+</html>
