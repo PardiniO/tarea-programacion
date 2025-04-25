@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="wclassth=device-wclassth, initial-scale=1.0">
+    <title>TaTeTi</title>
+    <script>
+        let currentPlayer = "X";
+        let puntajeX = 0;
+        let puntajeO = 0;
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const celdas = document.querySelectorAll(".cell-left, .cell-center, .cell-right");
+            const turnoText = document.querySelector(".text");
+            const reset = document.querySelector(".newGame");
+            const puntajeXText = document.querySelector(".player1, .puntaje");
+            const puntajeOText = document.querySelector(".player2, .puntaje");
+
+            const lineasGanadoras = [
+                [0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6],
+            ]
+
+            turnoText.textContent = `Turno de: ${currentPlayer}`;
+
+            celdas.forEach((celda, index) => {
+                celda.addEventListener("click", function() {
+                    if (celda.textContent !== "") return;
+                    
+                    celda.textContent = currentPlayer;
+                    celda.style.color = currentPlayer === "X" ? "red" : "blue";
+                    
+                    currentPlayer = currentPlayer === "X" ? "O" : "X";
+                    
+                    turnoText.textContent = `Turno de: ${currentPlayer}`;
+
+                    if(verifGanador()) {
+                        if(currentPlayer === "X") {
+                            puntajeX++;
+                            puntajeXText.textContent = puntajeX;
+                        } else {
+                            puntajeO++;
+                            puntajeOText.textContent = puntajeO;
+                        }
+
+                        limpiarTablero();
+                        return;
+                    }
+                });
+            });
+
+            reset.addEventListener('click', function() {
+                location.reload();
+            });
+
+            function verifGanador() {
+                return lineasGanadoras.some(combinacion => {
+                    const [a, b, c] = combinacion;
+                    return (
+                        celdas[a].textContent === currentPlayer &&
+                        celdas[b].textContent === currentPlayer &&
+                        celdas[c].textContent === currentPlayer
+                    );
+                });
+            }
+
+            function limpiarTablero() {
+                celdas.forEach(celda => {
+                    celda.textContent = "";
+                });
+                currentPlayer = "X";
+                turnoText.textContent = `Turno de: ${currentPlayer}`;
+            }
+        });
+
+    </script>
+
+    <style>
+        body {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            height: 100vh;
+        }
+
+        .main-content, .second-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: start;
+            align-items: center;
+            width: 50%;
+        }
+
+        .board {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            background-color: rgb(0, 0, 0);
+            width: 100%;
+        }
+
+        .points {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            flex-direction: row;
+            gap: 20px;
+            position: relative;
+        }
+
+        .text {
+            margin-top: 20px;
+        }
+
+        .buttons {
+            margin-top: 20px;
+        }
+
+        .player1, .player2 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 10px;
+        }
+
+        .player1 {
+            border-right: 2px solid black;
+        }
+
+        .name {
+            border-bottom: 2px solid black;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+        }
+
+        .row-top, .row-center, .row-bottom, .points {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: row;
+        }
+
+        .cell-left, .cell-center, .cell-right {
+            width: 100px;
+            height: 100px;
+            background-color: rgb(70, 43, 26);
+            border: 2px solid black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2em;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-content">
+        <section class="board">
+            <div class="row-top">
+                <div class="cell-left"></div>
+                <div class="cell-center"></div>
+                <div class="cell-right"></div>
+            </div>
+            
+            <div class="row-center">
+                <div class="cell-left"></div>
+                <div class="cell-center"></div>
+                <div class="cell-right"></div>
+            </div>
+            
+            <div class="row-bottom">
+                <div class="cell-left"></div>
+                <div class="cell-center"></div>
+                <div class="cell-right"></div>
+            </div>
+        </section>
+        
+        <section class="buttons">
+            <button class="newGame">Nuevo juego</button>
+        </section>
+    </div>
+
+    <div class="second-content">
+        <section class="points">
+            <div class="player1">
+                <h2 class="name">Player X</h2>
+                <p class="puntaje">0</p>
+            </div>
+            <div class="player2">
+                <h2 class="name">Player O</h2>
+                <p class="puntaje">0</p>
+            </div>
+        </section>
+        
+        <section class="text">
+            <p class="text">Turno de: </p>
+        </section>
+    </div>
+    
+</body>
+</html>
