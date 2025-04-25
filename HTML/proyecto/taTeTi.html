@@ -42,11 +42,7 @@
                         }
                         limpiarTablero();
                         return;
-                    } else {
-                        anuncioText.textContent = "Empate";
-                        limpiarTablero();
-                        return;
-                    }
+                    } 
 
                 });
             });
@@ -82,6 +78,8 @@
     </script>
 
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Quantico:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+        
         body {
             display: flex;
             flex-direction: row;
@@ -94,8 +92,11 @@
         .main-content, .second-content {
             display: flex;
             flex-direction: column;
-            justify-content: start;
+            justify-content: center;
             align-items: center;
+            padding: 10px;
+            font-family: quantico, sans-serif;
+            font-size: 2em;
         }
 
         .board {
@@ -118,10 +119,17 @@
 
         .text {
             margin-top: 20px;
+            font-size: 2em;
         }
 
-        .buttons {
+        button {
+            width: 100px;
+            height: 50px;
+            background-color: rgb(0, 0, 0);
             margin-top: 20px;
+            font-family: inherit;
+            border: none;
+            color: white;
         }
 
         .player1, .player2 {
@@ -129,7 +137,6 @@
             justify-content: center;
             align-items: center;
             flex-direction: column;
-            padding: 10px;
         }
 
         .player1 {
@@ -152,7 +159,7 @@
         .cell-left, .cell-center, .cell-right {
             width: 100px;
             height: 100px;
-            background-color: rgb(70, 64, 60);
+            background-color: rgb(95, 95, 95);
             border: 2px solid black;
             display: flex;
             justify-content: center;
@@ -191,11 +198,11 @@
     <div class="second-content">
         <section class="points">
             <div class="player1">
-                <h2 class="name">Player X</h2>
+                <h2 class="name">X</h2>
                 <p class="puntaje">0</p>
             </div>
             <div class="player2">
-                <h2 class="name">Player O</h2>
+                <h2 class="name">O</h2>
                 <p class="puntaje">0</p>
             </div>
         </section>
