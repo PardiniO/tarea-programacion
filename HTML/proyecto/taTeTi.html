@@ -11,14 +11,11 @@
 
         document.addEventListener("DOMContentLoaded", function() {
             const celdas = document.querySelectorAll(".cell-left, .cell-center, .cell-right");
-            const turnoText = document.querySelector(".text");
+            const turnoText = document.querySelector("#turno");
             const reset = document.querySelector(".newGame");
-            const puntajeXText = document.querySelector(".player1, .puntaje");
-            const puntajeOText = document.querySelector(".player2, .puntaje");
-
-            const lineasGanadoras = [
-                [0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6],
-            ]
+            const puntajeXText = document.querySelector(".player1 .puntaje");
+            const puntajeOText = document.querySelector(".player2 .puntaje");
+            const anuncioText = document.querySelector("#anuncio");
 
             turnoText.textContent = `Turno de: ${currentPlayer}`;
 
@@ -33,18 +30,24 @@
                     
                     turnoText.textContent = `Turno de: ${currentPlayer}`;
 
-                    if(verifGanador()) {
-                        if(currentPlayer === "X") {
+                    const ganador = verifGanador();
+                    if (ganador) {
+                        anuncioText.textContent = `Gana: ${ganador}`;
+                        if (ganador === "X") {
                             puntajeX++;
                             puntajeXText.textContent = puntajeX;
                         } else {
                             puntajeO++;
                             puntajeOText.textContent = puntajeO;
                         }
-
+                        limpiarTablero();
+                        return;
+                    } else {
+                        anuncioText.textContent = "Empate";
                         limpiarTablero();
                         return;
                     }
+
                 });
             });
 
@@ -53,14 +56,19 @@
             });
 
             function verifGanador() {
-                return lineasGanadoras.some(combinacion => {
+                const combinaciones = [
+                    [0, 1, 2], [3, 4, 5], [6, 7, 8],
+                    [0, 3, 6], [1, 4, 7], [2, 5, 8], 
+                    [0, 4, 8], [2, 4, 6],
+                ]
+
+                for (let combinacion of combinaciones) {
                     const [a, b, c] = combinacion;
-                    return (
-                        celdas[a].textContent === currentPlayer &&
-                        celdas[b].textContent === currentPlayer &&
-                        celdas[c].textContent === currentPlayer
-                    );
-                });
+                    if (celdas[a].textContent && celdas[a].textContent === celdas[b].textContent && celdas[a].textContent === celdas[c].textContent) {
+                        return celdas[a].textContent;
+                    }
+                }
+                return null;
             }
 
             function limpiarTablero() {
@@ -71,7 +79,6 @@
                 turnoText.textContent = `Turno de: ${currentPlayer}`;
             }
         });
-
     </script>
 
     <style>
@@ -89,7 +96,6 @@
             flex-direction: column;
             justify-content: start;
             align-items: center;
-            width: 50%;
         }
 
         .board {
@@ -146,7 +152,7 @@
         .cell-left, .cell-center, .cell-right {
             width: 100px;
             height: 100px;
-            background-color: rgb(70, 43, 26);
+            background-color: rgb(70, 64, 60);
             border: 2px solid black;
             display: flex;
             justify-content: center;
@@ -195,7 +201,8 @@
         </section>
         
         <section class="text">
-            <p class="text">Turno de: </p>
+            <p id="turno">Turno de: </p>
+            <p id="anuncio"></p>
         </section>
     </div>
     
