@@ -1,4 +1,4 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -17,7 +17,7 @@
             const puntajeOText = document.querySelector(".player2 .puntaje");
             const anuncioText = document.querySelector("#anuncio");
 
-            turnoText.textContent = `Turno de: ${currentPlayer}`;
+            turnoText.innerHTML = `<span style="color: white;">Turno de:</span> <span style="color: ${currentPlayer === "X" ? "red" : "blue"}">${currentPlayer}</span>`;
             turnoText.style.color = currentPlayer === "X" ? "red" : "blue";
 
             celdas.forEach((celda, index) => {
@@ -30,7 +30,7 @@
                     
                     const ganador = verifGanador();
                     if (ganador) {
-                        anuncioText.textContent = `Gana: ${ganador}`;
+                        anuncioText.innerHTML = `<span style="color: white;">Gana:</span> <span style="color: ${ganador === "X" ? "red" : "blue"}">${ganador}</span>`;
                         anuncioText.style.color = ganador === "X" ? "red" : "blue";
                         if (ganador === "X") {
                             puntajeX++;
@@ -45,7 +45,6 @@
                         return;
                     } else if ([...celdas].every(celda => celda.textContent !== "")) {
                         anuncioText.textContent = "Empate";
-                        
                         celdas.forEach(celda => {
                             celda.style.backgroundColor = "gray";
                         });
@@ -56,7 +55,7 @@
                     }
 
                     currentPlayer = currentPlayer === "X" ? "O" : "X";
-                    turnoText.textContent = `Turno de: ${currentPlayer}`;
+                    turnoText.innerHTML = `<span style="color: white;">Turno de:</span> <span style="color: ${currentPlayer === "X" ? "red" : "blue"}">${currentPlayer}</span>`;
                 });
             });
 
@@ -77,8 +76,11 @@
 
                         const color = celdas[a].textContent === "X" ? "red" : "blue";
                         celdas[a].style.color = color;
+                        celdas[a].style.backgroundColor = color;
                         celdas[b].style.color = color;
+                        celdas[b].style.backgroundColor = color;
                         celdas[c].style.color = color;
+                        celdas[c].style.backgroundColor = color;
 
                         return celdas[a].textContent;
                     }
@@ -103,7 +105,6 @@
         
         body {
             background: linear-gradient(135deg, #1e3c72, #860101);
-            /*background: linear-gradient(135deg, #1a1a1a, #333);*/
             color: white;
             font-family: 'Quantico', sans-serif;
             margin: 0;
@@ -112,6 +113,7 @@
             flex-direction: row;
             justify-content: center;
             align-items: center;
+            gap: 50px;
         }
 
         .main-content, .second-content {
@@ -119,9 +121,25 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            gap: 20px;
+        }
+
+        .main-content {
             padding: 10px;
             font-family: inherit;
-            font-size: 2em;
+            font-size: 1.5em;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .second-content {
+            display: flex;
+            justify-content: center;
+            align-items: start;
+            flex-direction: column;
+            font-family: inherit;
+            font-size: 1.5em;
+            width: auto;
         }
 
         .board {
@@ -133,6 +151,9 @@
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            width: 100%;
+            max-width: 400px;
+            margin-left: 10px;
         }
 
         .points {
@@ -140,28 +161,29 @@
             justify-content: space-around;
             align-items: center;
             flex-direction: row;
-            gap: 20px;
+            gap: 15px;
             background-color: #222;
-            padding: 20px;
+            padding: 10px;
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-            margin-top: 20px;
-            width: 100%;
-            max-width: 400px;
+            width: auto;
+            max-width: 200px;
+            height: auto;
         }
 
         .text {
             margin-top: 20px;
             font-size: 1.5em;
+            text-align: center;
         }
 
         button {
-            width: 120px;
-            height: 50px;
+            width: 100%;
+            max-width: 200px;
             background-color: #007BFF;
             color: white;
             font-family: inherit;
-            font-size: 0.5em;
+            font-size: 1em;
             flex-wrap: nowrap;
             border: none;
             border-radius: 5px;
@@ -178,31 +200,31 @@
 
         .player1, .player2 {
             display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
             justify-content: center;
             align-items: center;
-            flex-direction: column;
-            padding: 10px;
+            padding: 5px;
             background-color: #333;
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-            width: 120px;
-            height: 120px;
+            width: 60px;
+            height: auto;
         }
 
         .player1 .name {
-            border-right: 2px solid black;
+            border-bottom: 2px solid black;
             color: red;
         }
 
         .player2 .name {
-            border-left: 2px solid black;
+            border-bottom: 2px solid black;
             color: blue;
         }
 
         .name {
-            font-size: 1em;
+            font-size: 1.2em;
             font-weight: bold;
-            color: #ffd700;
             margin-bottom: 5px;
             text-align: center;
             border-bottom: 2px solid black;
@@ -210,25 +232,25 @@
         }
 
         .puntaje {
-            font-size: 1.2em;
+            font-size: 0.9em;
             font-weight: bold;
             color: #fff;
             text-align: center;
+            justify-content: center;
             margin: 0;
-            overflow: hidden;
-            text-overflow: visible;
         }
 
-        .row-top, .row-center, .row-bottom, .points {
+        .row-top, .row-center, .row-bottom {
             display: flex;
             justify-content: center;
             align-items: center;
             flex-direction: row;
+            width: 100%;
         }
 
         .cell-left, .cell-center, .cell-right {
-            width: 100px;
-            height: 100px;
+            width: 30%;
+            aspect-ratio: 1;
             background-color: #444;
             border: 2px solid #555;
             display: flex;
@@ -241,6 +263,90 @@
         .cell-left:hover, .cell-center:hover, .cell-right:hover {
             background-color: #666;
             cursor: pointer;
+        }
+
+        @media screen and (max-width: 600px) {
+            body {
+                flex-direction: column-reverse;
+                gap: 10px;
+                padding: 10px;
+
+            }
+
+            .main-content {
+                margin-top: 5px;
+            }
+
+            .second-content {
+                margin: 0;
+            }
+
+            .main-content, .second-content {
+                gap: 5px;
+            }
+
+            .board {
+                max-width: 250px;
+            }
+
+            .cell-left, .cell-center, .cell-right {
+                font-size: 1.5em;
+            }
+
+            .points {
+                justify-content: space-around;
+                align-items: center;
+                padding: 5px;
+            }
+
+            .text {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                text-align: center;
+                align-items: center;
+                font-size: 1em;
+                gap: 5px;
+                margin-top: 10px;
+            }
+
+            .player1, .player2 {
+                width: 50px;
+                height: auto;
+                padding: 3px;
+            }
+
+            .name {
+                font-size: 1em;
+            }
+
+            button {
+                font-size: 0.7em;
+                margin-top: auto;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .board {
+                max-width: 250px;
+            }
+
+            .cell-left, .cell-center, .cell-right {
+                font-size: 1.2em;
+            }
+
+            .player1, .player2 {
+                width: 60px;
+                max-width: 70px;
+            }
+
+            button {
+                font-size: 0.8em;
+            }
+
+            .text {
+                font-size: 1em;
+            }
         }
     </style>
 </head>
